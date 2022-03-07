@@ -5,6 +5,7 @@ import nltk
 import pandas as pd
 from nltk.corpus import stopwords
 from sklearn.metrics import precision_score, recall_score, f1_score
+from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 
 POS = "V"
@@ -75,15 +76,27 @@ def split_samples(dataframe, test_percent):
 
 
 def train(train_X, train_y, kernel):
-    svc = SVC(kernel=kernel)
-    svc.fit(train_X, train_y)
+    svc = SVC(kernel=kernel).fit(train_X, train_y)
     return svc
 
 
 def eval_model(model, test_X, test_y):
     predictions = model.predict(test_X)
-    print('Kernel:', model.kernel),
+
+    if type(model) == SVC:
+        model_name = f'SVM: {model.kernel} kernel'
+    elif type(model) == MLPClassifier:
+        model_name = 'MLP'
+    else:
+        model_name = 'not specified'
+    print(model_name),
     print('_________________')
     print('Precision:', precision_score(test_y, predictions))
     print('Recall:', recall_score(test_y, predictions))
     print('F1 Score:', f1_score(test_y, predictions))
+    print()
+
+
+def train_mlp(train_X, train_y):
+    mlp = MLPClassifier(activation='tanh', random_state=1, max_iter=250).fit(train_X, train_y)
+    return mlp
