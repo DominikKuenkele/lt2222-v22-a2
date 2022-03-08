@@ -19,45 +19,41 @@ can be easily switched by changing the `POS` constant in `mycode.py`)
 ```
 SVM: linear kernel
 _________________
-Precision: 0.2
-Recall: 0.0016825574873808188
-F1 Score: 0.003337041156840934
+Precision: 0.5106382978723404
+Recall: 0.027972027972027972
+F1 Score: 0.053038674033149165
 
 SVM: rbf kernel
 _________________
-Precision: 0.0
-Recall: 0.0
-F1 Score: 0.0
-
+Precision: 0.7446808510638298
+Recall: 0.020396270396270396
+F1 Score: 0.03970504821327284
 ```
 
-While the linear model has some correct predictions, the rbf model, does
-not predict any verbs in the third position at all. Therefore, all three 
-measures are 0.
-The linear model has some success. The precision of 12,5% is in my view
-quiet high for only looking at the last two characters of the surrounding
-words. Still, as seen in the recall score, there are still a lot of 
-missing predictions for verbs. So the features seem not to be enough for the SVM
-to safely predict the verb.
+Both models perform surprisingly well, giving that it is only based on
+the last two characters of the surrounding words. Especially, the rbf kernel
+has a high precision. What is striking, that the recall is very low, compared
+to the precision; there are still a lot of missing predictions for verbs. 
 
-Interestingly, switching the POS from 'V' to 'N', increases the measures
-by a lot. Furthermore, the recall score is also higher than the precision.
+Interestingly, switching the POS from 'V' to 'N', increases the recall
+by a lot. It is now even higher than the precision.
 One reason for that may be the bigger number of positive samples 
-in the training data
+in the training data. For verbs, there existed around 8000 to 9000 positive samples,
+while there are around 30000 positive samples for nouns. 
 
 **predictions for POS 'N'** 
 ```
 SVM: linear kernel
 _________________
-Precision: 0.6274014155712841
-Recall: 0.9885295523339175
-F1 Score: 0.7676130389064143
+Precision: 0.6597424684159378
+Recall: 0.8730107699726732
+F1 Score: 0.7515394727738186
 
 SVM: rbf kernel
 _________________
-Precision: 0.6362667803111016
-Recall: 0.9514099091922893
-F1 Score: 0.7625614505522569
+Precision: 0.6662198391420912
+Recall: 0.8787976209612602
+F1 Score: 0.7578845220766617
 ```
 
 
@@ -72,20 +68,21 @@ python bonus.py
 ```
 MLP
 _________________
-Precision: 0.25
-Recall: 0.004640371229698376
-F1 Score: 0.00911161731207289
+Precision: 0.28978388998035365
+Recall: 0.16573033707865167
+F1 Score: 0.21086490350250175
 ```
 
-This classifier performs a lot better than the SVM.
-As the SVM, this model can predict the POS 'N' also better. 
+This classifier performs on verbs far worse than the SVM.
+As the SVM, this model can predict the POS 'N' better and reaches a similar
+performance as the SVM. 
 
 **predictions for POS 'N'** 
 ```
 MLP
 _________________
-Precision: 0.6387798586968712
-Recall: 0.9154612664738027
-F1 Score: 0.752493559680296
+Precision: 0.6904160574239
+Recall: 0.8195014200063111
+F1 Score: 0.7494408772815814
 ```
 
