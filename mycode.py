@@ -50,6 +50,7 @@ def create_samples(sentences, samples):
 
 
 def create_df(samples):
+    positions = [-2, -1, 1, 2]
     features = [POS]
     dataframe = []
 
@@ -57,12 +58,13 @@ def create_df(samples):
         dataframe.append([0] * len(features))
         if sample[1] == 1:
             dataframe[-1][0] += 1
-        for feature in sample[0]:
-            if feature not in features:
-                features.append(feature)
+        for index, feature in enumerate(sample[0]):
+            pos_feature = f'{feature}_{positions[index]}'
+            if pos_feature not in features:
+                features.append(pos_feature)
                 for prev_sample in dataframe:
                     prev_sample.append(0)
-            dataframe[-1][features.index(feature)] += 1
+            dataframe[-1][features.index(pos_feature)] += 1
 
     return pd.DataFrame(dataframe, columns=features)
 
