@@ -1,7 +1,7 @@
 # LT2222 V22 Assignment 2
 > Part of the Master in Language Technology at the University of Gothenburg
 >
-> **Course:** Machine learning for statistical NLP: advanced (LT2222)
+> **Course:** Machine learning for statistical NLP: introduction (LT2222)
 >
 > **Assignment:** Assignment 2
 
